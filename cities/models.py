@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, String, Text
+from sqlalchemy.orm import Mapped, mapped_column
 
 from database import Base
 
@@ -6,6 +7,9 @@ from database import Base
 class City(Base):
     __tablename__ = "city"
 
-    id = Column(Integer, primary_key=True)
-    name = Column(String(255), nullable=False, unique=True)
-    additional_info = Column(Text)
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    name: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
+    additional_info: Mapped[str] = mapped_column(Text, nullable=True)
+
+    def __repr__(self):
+        return f"<City {self.name}>"
