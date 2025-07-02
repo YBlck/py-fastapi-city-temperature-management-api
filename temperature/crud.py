@@ -18,7 +18,7 @@ async def fetch_current_temperature(city: str) -> float | None:
         response = await client.get(CURRENT_WEATHER_URL, params=params)
 
         if response.status_code == 200:
-            weather_data = await response.json()
+            weather_data = response.json()
             temperature = weather_data["current"]["temp_c"]
             return temperature
         else:
