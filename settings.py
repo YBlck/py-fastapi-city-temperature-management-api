@@ -1,10 +1,12 @@
 import os
 
-import dotenv
+from dotenv import load_dotenv
 
 
-dotenv.load_dotenv()
+load_dotenv()
 
 DATABASE_URL = os.getenv(
     "DATABASE_URL", "sqlite+aiosqlite:///city_temp_mng.db"
 )
+
+WEATHER_API_KEY = os.getenv("WEATHER_API_KEY")
