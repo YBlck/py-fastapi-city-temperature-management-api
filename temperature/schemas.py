@@ -8,8 +8,10 @@ class TemperatureBase(BaseModel):
     temperature: float
 
 
-class TemperatureCreate(TemperatureBase):
-    pass
+class TemperatureUpdate(BaseModel):
+    cities_total: int
+    updated: int
+    missing: list[str]
 
 
 class TemperatureResponse(TemperatureBase):
