@@ -1,6 +1,7 @@
 import asyncio
 
 import httpx
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 import settings
@@ -52,3 +53,17 @@ async def update_temperature(db: AsyncSession) -> dict:
     await db.commit()
 
     return {"updated": updated, "missing": missing}
+
+
+async def get_all_temperatures(
+    db: AsyncSession, city_id: int = None
+) -> list[models.Temperature]:
+    stmt = select(models.Temperature).order_by(models.Temperature.date_time)
+
+    if city_id:
+        stmt = stmt.where(models.Temperature.city_id == city_id)
+
+    result = await db.execute(stmt)
+    temperatures = result.scalars().all()
+
+    return temperatures
