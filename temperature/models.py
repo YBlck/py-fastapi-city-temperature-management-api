@@ -18,8 +18,8 @@ class Temperature(Base):
     )
     temperature: Mapped[float] = mapped_column(nullable=False)
 
-    city: Mapped["City"] = relationship(
-        back_populates="temperatures", passive_deletes=True
+    city = relationship(
+        "City", back_populates="temperatures", passive_deletes=True
     )
 
     def __repr__(self):

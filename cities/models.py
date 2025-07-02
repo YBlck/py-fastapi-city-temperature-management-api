@@ -11,8 +11,8 @@ class City(Base):
     name: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
     additional_info: Mapped[str] = mapped_column(Text, nullable=True)
 
-    temperatures: Mapped[list["Temperature"]] = relationship(
-        back_populates="city", cascade="all, delete-orphan"
+    temperatures = relationship(
+        "Temperature", back_populates="city", cascade="all, delete-orphan"
     )
 
     def __repr__(self):
